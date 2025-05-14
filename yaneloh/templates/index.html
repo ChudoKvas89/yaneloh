@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Я не лох</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='coins.css') }}">
+    <style>
+        body {
+            background-color: #C0C0C0;
+            color: #FFFF00;
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            padding: 50px;
+            text-shadow: 1px 1px 1px black;
+            overflow: hidden;
+        }
+
+        h1 { font-size: 48px; color: #FFD700; }
+
+        .coin-display {
+            font-size: 32px;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        .click-button {
+            background-color: #00FF7F;
+            border: 3px solid #FF00FF;
+            padding: 20px 40px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 10px #7FFF00;
+            transition: transform 0.1s;
+        }
+
+        .click-button:hover {
+            transform: scale(1.1);
+            background-color: #7FFF00;
+        }
+
+        .shop-button {
+            margin-top: 30px;
+            background-color: #4169E1;
+            color: #FFFF00;
+            padding: 12px 24px;
+            font-size: 18px;
+            border: 2px solid black;
+            cursor: pointer;
+        }
+
+        .coin {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Проект: Я не лох</h1>
+    <div class="coin-display">Монеты: <span id="coins">0</span></div>
+    <div>Сила клика: <span id="clickPower">1</span></div>
+
+    <button class="click-button" onclick="addCoin()">Я не лох</button>
+
+    <br>
+    <button class="shop-button" onclick="window.location.href='/shop'">🛒 В магазин</button>
+
+    <script>
+        let coins = parseInt(localStorage.getItem("coins")) || 0;
+        let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
+
+        document.getElementById("coins").textContent = coins;
+        document.getElementById("clickPower").textContent = clickPower;
+
+        function addCoin() {
+            coins += clickPower;
+            localStorage.setItem("coins", coins);
+            document.getElementById("coins").textContent = coins;
+            createCoinAnimation();
+        }
+
+        function createCoinAnimation() {
+            const coin = document.createElement("div");
+            coin.className = "coin-fly";
+            coin.style.left = (window.innerWidth / 2 - 15) + "px";
+            coin.style.top = (window.innerHeight / 2 - 15) + "px";
+            coin.style.setProperty('--x', (Math.random() * 400 - 200) + 'px');
+            coin.style.setProperty('--y', (Math.random() * -200 - 50) + 'px');
+            document.body.appendChild(coin);
+
+            setTimeout(() => coin.remove(), 800);
+        }
+    </script>
+
+</body>
+</html>

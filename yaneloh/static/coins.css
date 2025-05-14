@@ -1,0 +1,15 @@
+@keyframes fly {
+    0% { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(0.5); }
+}
+
+.coin-fly {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: url('https://cdn-icons-png.flaticon.com/512/138/138281.png') no-repeat center;
+    background-size: cover;
+    animation: fly 0.8s forwards;
+    pointer-events: none;
+    z-index: 9999;
+}
