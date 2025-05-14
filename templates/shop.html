@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Магазин | Я не лох</title>
+    <style>
+        body {
+            background-color: #C0C0C0;
+            color: #FFFF00;
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .item {
+            border: 3px dashed #9400D3;
+            background-color: #FF69B4;
+            padding: 20px;
+            margin: 20px auto;
+            width: 300px;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            border: 2px solid black;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .back {
+            margin-top: 30px;
+            background-color: #4169E1;
+            color: #FFFF00;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🛒 Магазин</h1>
+    <div>Монеты: <span id="coins">0</span></div>
+
+    <div class="item">
+        <h2>💪 Сила клика +1</h2>
+        <p>Цена: 100 монет</p>
+        <button onclick="buyUpgrade()">Купить</button>
+    </div>
+
+    <button class="back" onclick="window.location.href='/'">← Назад</button>
+
+    <script>
+        let coins = parseInt(localStorage.getItem("coins")) || 0;
+        let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
+
+        document.getElementById("coins").textContent = coins;
+
+        function buyUpgrade() {
+            const price = 100;
+            if (coins >= price) {
+                coins -= price;
+                clickPower += 1;
+                localStorage.setItem("coins", coins);
+                localStorage.setItem("clickPower", clickPower);
+                document.getElementById("coins").textContent = coins;
+                alert("💥 Куплено! Сила клика +1");
+            } else {
+                alert("🚫 Недостаточно монет");
+            }
+        }
+    </script>
+
+</body>
+</html>
